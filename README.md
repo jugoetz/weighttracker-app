@@ -1,16 +1,17 @@
 # weighttracker
 
-A new Flutter project.
+![weightracker-home.png](assets%2Fimg%2Fweightracker-home.png)
 
-## Getting Started
+A simple app to track weight.
 
-This project is a starting point for a Flutter application.
+## Description
 
-A few resources to get you started if this is your first Flutter project:
+The whole idea of this was to have a maximally simple app to record weight.
+The app can show floating averages.
+That's all folks.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Screens
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![weightracker-entries.png](assets%2Fimg%2Fweightracker-entries.png)
+
+![weightracker-changeweight-keyboard.png](assets%2Fimg%2Fweightracker-changeweight-keyboard.png)

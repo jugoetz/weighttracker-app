@@ -27,10 +27,11 @@ class _WeightState extends State<Weight> {
         height: 800,
         child: Column(
           children: [
+            Padding(padding: EdgeInsets.all(20)),
             Container(
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.all(16),
                 width: 400,
-                height: 200,
+                height: 300,
                 child: MyLineChart()),
             Padding(padding: EdgeInsets.all(20)),
             Consumer<WeightHistory>(

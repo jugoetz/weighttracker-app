@@ -2,7 +2,6 @@ import 'package:test/test.dart';
 import 'package:collection/collection.dart';
 
 import 'package:weighttracker/models/weightRecord.dart';
-import 'package:weighttracker/models/weightHistory.dart';
 
 void main() {
   // test('adding a more recent entry changes current weight', () {

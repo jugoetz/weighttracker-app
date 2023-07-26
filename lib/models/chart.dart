@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:weighttracker/models/weightHistory.dart';
@@ -32,7 +31,7 @@ class MyLineChart extends StatelessWidget {
                     return Container(
                       child: Text(
                         'No weight recorded',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       alignment: Alignment.center,
                     );
@@ -79,7 +78,7 @@ class MyLineChart extends StatelessWidget {
     strokeColor: colorScheme.onTertiary);}),
         ),
         LineChartBarData(  // weekly average
-          spots: convertWeightRecordsToFlSpot(getWeeklyAverage(
+          spots: convertWeightRecordsToFlSpot(get7DayAverage(
               weightRecords.length != 0 ? weightRecords : testWeights)),
           colors: [colorScheme.onPrimary],
           barWidth: 3.0,
@@ -88,7 +87,7 @@ class MyLineChart extends StatelessWidget {
           dotData: dotData,
         ),
         LineChartBarData(  // monthly average
-          spots: convertWeightRecordsToFlSpot(getMonthlyAverage(
+          spots: convertWeightRecordsToFlSpot(get30DayAverage(
               weightRecords.length != 0 ? weightRecords : testWeights)),
           colors: [colorScheme.tertiary],
           barWidth: 3.0,
@@ -114,11 +113,39 @@ class MyLineChart extends StatelessWidget {
     drawHorizontalLine: true,
     drawVerticalLine: false,
     horizontalInterval: 1,
-    getDrawingHorizontalLine: (double _) {return FlLine(strokeWidth: 1, color: Colors.grey.shade700);},
+    getDrawingHorizontalLine: (double _) {return FlLine(strokeWidth: .5, color: Colors.grey.shade700);},
 
   );
 
   FlBorderData get borderData => FlBorderData(show: false);
+
+/*  FlTitlesData get titlesData {
+    DateTime startDate = DateTime(2022, 6, 14); // Replace with your actual start date
+    DateTime endDate = DateTime(2022, 7, 26); // Replace with your actual end date
+
+    double totalDays = endDate.difference(startDate).inDays.toDouble();
+    double numberOfMonths = (totalDays / 30).ceil().toDouble();
+
+    return FlTitlesData(
+      show: true,
+      rightTitles: SideTitles(showTitles: false),
+      topTitles: SideTitles(showTitles: false),
+      leftTitles: SideTitles(
+        showTitles: true,
+        reservedSize: 30,
+      ),
+      bottomTitles: SideTitles(
+        showTitles: true,
+        getTitles: (double value) {
+          DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(value.toInt());
+          return DateFormat.MMM().format(dateTime);
+        },
+        reservedSize: 30,
+        interval: totalDays / numberOfMonths,
+        margin: 10,
+      ),
+    );
+  }*/
 
   // TitlesData refers to axis labels, not to the title in the matplotlib sense
   FlTitlesData get titlesData => FlTitlesData(
@@ -133,10 +160,10 @@ class MyLineChart extends StatelessWidget {
       showTitles: true,
       getTitles: (double value) {
         return DateFormat.MMM().format(DateTime.fromMillisecondsSinceEpoch(value.toInt()));
-        // final now = DateTime.now().millisecondsSinceEpoch;
-        // return ((now - value) / 3600000 ~/ 24).toString();
       },
+      reservedSize: 30,
       interval: 1000 * 60 * 60 * 24 * 31, // 30 d in ms
+      margin: 10,
     ),
   );
 

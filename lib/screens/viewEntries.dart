@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +25,7 @@ class ViewEntriesScreen extends StatelessWidget {
                             return Container(
                               child: Text(
                                   'No weight recorded',
-                                style: Theme.of(context).textTheme.headline5,
+                                style: Theme.of(context).textTheme.headlineSmall,
                               ),
                               alignment: Alignment.center,
                             );

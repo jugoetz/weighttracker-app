@@ -1,6 +1,4 @@
-import 'dart:collection';
 
-import 'dart:math';
 
 class WeightRecord {
   /// Class to hold individual weight records, consisting of a weight
@@ -55,6 +53,56 @@ List<WeightRecord> getWeeklyAverage(List<WeightRecord> weights) {
       weightThisWeek = weekly.elementAt(0).weight;
     }
     aggregatedWeights.add(WeightRecord(weightThisWeek, m));
+  }
+
+  return aggregatedWeights;
+}
+
+List<WeightRecord> get7DayAverage(List<WeightRecord> weights) {
+  weights.sort((a, b) => a.datetime.compareTo(b.datetime));
+
+  DateTime startDate = weights.first.datetime;
+  DateTime endDate = weights.last.datetime;
+
+  List<WeightRecord> aggregatedWeights = [];
+  for (DateTime date = startDate; date.isBefore(endDate); date = date.add(Duration(days: 1))) {
+    double sum = 0;
+    int count = 0;
+    for (WeightRecord weight in weights) {
+      if (weight.datetime.isAfter(date.subtract(Duration(days: 7))) && weight.datetime.isBefore(date)) {
+        sum += weight.weight;
+        count++;
+      }
+    }
+    if (count > 0) {
+      double average = sum / count;
+      aggregatedWeights.add(WeightRecord(average, date));
+    }
+  }
+
+  return aggregatedWeights;
+}
+
+List<WeightRecord> get30DayAverage(List<WeightRecord> weights) {
+  weights.sort((a, b) => a.datetime.compareTo(b.datetime));
+
+  DateTime startDate = weights.first.datetime;
+  DateTime endDate = weights.last.datetime;
+
+  List<WeightRecord> aggregatedWeights = [];
+  for (DateTime date = startDate; date.isBefore(endDate); date = date.add(Duration(days: 1))) {
+    double sum = 0;
+    int count = 0;
+    for (WeightRecord weight in weights) {
+      if (weight.datetime.isAfter(date.subtract(Duration(days: 30))) && weight.datetime.isBefore(date)) {
+        sum += weight.weight;
+        count++;
+      }
+    }
+    if (count > 0) {
+      double average = sum / count;
+      aggregatedWeights.add(WeightRecord(average, date));
+    }
   }
 
   return aggregatedWeights;

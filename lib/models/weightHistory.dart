@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:weighttracker/db/database.dart';
 import 'package:weighttracker/models/weightRecord.dart';

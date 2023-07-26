@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:weighttracker/models/weightRecord.dart';
-import 'package:flutter/widgets.dart';
 
 /// Tutorial for how to use sqflite:
 /// https://petercoding.com/flutter/2021/03/21/using-sqlite-in-flutter/
